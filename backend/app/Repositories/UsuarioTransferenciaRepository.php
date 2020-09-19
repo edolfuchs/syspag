@@ -84,8 +84,8 @@ class UsuarioTransferenciaRepository extends UsuarioTransferencia implements Usu
             }
 
             //NOTIFICAR O BENEFICIÁRIO VIA SERVIÇO EXTERNO
-            $strObservacao = null;
             $strDataNotificacao = Utilidade::toDate();
+            $strObservacao = 'Usuário Notificado em '.$strDataNotificacao;
             $intIdTipoStatusNotificacao = 10;
             $strNotificarTransferencia = $objServiceNotificacaoInterface->notificar();
 

@@ -62,18 +62,19 @@ export default {
         {
           text: "Data",
           sortable: false,
-          value: "strDataTransferencia",
-          width: "150px",
-        },
-        {
-          text: "Beneficiário",
-          sortable: false,
-          value: "strBeneficiario",
+          value: "strDataCadastro",
+          width: "200px",
         },
         {
           text: "Valor",
           sortable: false,
           value: "floatValor",
+          width: "200px",
+        },
+        {
+          text: "Beneficiário",
+          sortable: false,
+          value: "strBeneficiario",
         },
         {
           text: "Status",
@@ -145,21 +146,14 @@ export default {
             this.tablePagination = result.data;
 
             result.data.data.forEach((data) => {
-              let strDataNotificacao = data.strObservacao;
-
-              if (data.strDataNotificacao) {
-                strDataNotificacao =
-                  "Usuário notificado em " +
-                  this.$utilidade.toDate(data.strDataNotificacao);
-              }
-
               let item = {
                 intId: data.intId,
+                strDataCadastro:this.$utilidade.toDate(data.strDataCadastro),
                 strBeneficiario: data.obj_usuario_beneficiario.strNome,
                 floatValor: this.$utilidade.floatToMoney(data.floatValor),
                 strDataTransferencia: data.strDataTransferencia,
                 strStatus: data.obj_tipo_status_transferencia.strNome,
-                strDataNotificacao: strDataNotificacao,
+                strDataNotificacao: data.strObservacao,
                 disabledDeleteRows:
                   data.obj_tipo_status_transferencia.intId != 9,
                 style: "color:" + data.obj_tipo_status_transferencia.strCor,
