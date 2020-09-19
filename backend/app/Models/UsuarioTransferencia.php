@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Helpers\Utilidade;
+
 class UsuarioTransferencia extends BaseModel
 {
 
@@ -33,5 +35,10 @@ class UsuarioTransferencia extends BaseModel
     public function setFloatValorAttribute($value)
     {
         $this->attributes['floatValor'] = floatval($value);
+    }
+
+    public function setStrObservacaoAttribute($value)
+    {
+        $this->attributes['strObservacao'] = Utilidade::upperCase(Utilidade::textLimit($value, 1000));
     }
 }

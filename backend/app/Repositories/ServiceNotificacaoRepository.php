@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Exceptions\CustomException;
 use Illuminate\Support\Facades\Http;
 use App\Repositories\Contracts\ServiceNotificacaoRepositoryIntercace;
 

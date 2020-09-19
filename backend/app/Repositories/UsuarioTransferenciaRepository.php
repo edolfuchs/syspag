@@ -78,6 +78,7 @@ class UsuarioTransferenciaRepository extends UsuarioTransferencia implements Usu
             //VALIDAR A TRANSFERENCIA VIA SERVIÇO EXTERNO
             $intIdTipoStatusTransferencia = 5;
             $strAutorizarTransferencia = $objServiceAutorizadoInterface->autorizar();
+
             if ($strAutorizarTransferencia !== true) {
                 throw new \Exception("Transferência não autorizada. " . $strAutorizarTransferencia);
             }
@@ -85,9 +86,9 @@ class UsuarioTransferenciaRepository extends UsuarioTransferencia implements Usu
             //NOTIFICAR O BENEFICIÁRIO VIA SERVIÇO EXTERNO
             $strObservacao = null;
             $strDataNotificacao = Utilidade::toDate();
-
             $intIdTipoStatusNotificacao = 10;
             $strNotificarTransferencia = $objServiceNotificacaoInterface->notificar();
+
             if ($strNotificarTransferencia !== true) {
                 $strObservacao = "Notificação da transferência não enviado. " . $strNotificarTransferencia;
                 $strDataNotificacao = null;
@@ -102,8 +103,8 @@ class UsuarioTransferenciaRepository extends UsuarioTransferencia implements Usu
             $objUsuarioTransferencia->intIdTipoStatusNotificacao = $intIdTipoStatusNotificacao;
             $objUsuarioTransferencia->intIdTipoStatusNotificacao = $intIdTipoStatusNotificacao;
             $objUsuarioTransferencia->strDataNotificacao = $strDataNotificacao;
+            $objUsuarioTransferencia->strObservacao = $strObservacao;
             $objUsuarioTransferencia->floatValor = $arrayData['floatValor'];
-            $objUsuarioTransferencia->strObservacao = ($strObservacao ? Utilidade::textLimit($strObservacao, 1000) : null);
             $objUsuarioTransferencia->save();
 
             //REGISTRAR EXTRATO DE DÉBITO PARA QUEM TRANSFERIU
