@@ -18,7 +18,7 @@
 
       <ed-input-text
         class="col-md-4"
-        label="Nome"
+        label="Nome Completo"
         name="strNome"
         rules="required"
         v-model="formData.strNome"

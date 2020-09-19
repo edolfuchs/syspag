@@ -35,6 +35,7 @@ class UsuarioExtrato extends BaseModel
 
     public function setStrObservacaoAttribute($value)
     {
-        $this->attributes['strObservacao'] = Utilidade::textLimit($value, 255);
+        $this->attributes['strObservacao'] = Utilidade::upperCase(Utilidade::textLimit($value, 255));
     }
+    
 }

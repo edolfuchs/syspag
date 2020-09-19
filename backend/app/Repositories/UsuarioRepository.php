@@ -3,14 +3,15 @@
 namespace App\Repositories;
 
 use App\Models\Usuario;
+use App\Helpers\Utilidade;
 use App\Traits\FilterTrait;
 use App\Traits\ValidateTrait;
-use App\Helpers\Utilidade;
 use App\Rules\FloatValidation;
 use App\Rules\DocumentoValidation;
 use Illuminate\Support\Facades\DB;
 use App\Exceptions\CustomException;
 use App\Repositories\AuthRepository;
+use App\Rules\NomeCompletoValidation;
 use App\Repositories\Contracts\UsuarioRepositoryIntercace;
 
 class UsuarioRepository extends Usuario implements UsuarioRepositoryIntercace
@@ -46,7 +47,7 @@ class UsuarioRepository extends Usuario implements UsuarioRepositoryIntercace
             $arrayData,
             array(
                 'intId' => 'required|numeric|min:0',
-                'strNome' => 'required|max:100',
+                'strNome' => ['required','max:100',new NomeCompletoValidation()],
                 'intIdTipoUsuario' => 'required|numeric|min:2|max:3',
                 'strEmail' => 'required|email|max:100',
                 'strSenha' => 'required|min:6',

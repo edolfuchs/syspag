@@ -26,6 +26,6 @@
 
     ```
 
-## 4. Consulta documentação de rotas da API
+## 4. Consultar documentação de rotas da API
 
 **[https://documenter.getpostman.com/view/491896/TVKBYxpX](https://documenter.getpostman.com/view/491896/TVKBYxpX)**

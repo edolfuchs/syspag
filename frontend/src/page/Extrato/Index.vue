@@ -11,7 +11,7 @@
         >
           <ed-input-text
             class="col-md-12"
-            label="Qual o valor que dejeja incluir no seu saldo?"
+            label="Qual o valor que deseja incluir na sua carteira?"
             name="floatValor"
             rules="required"
             v-model="formData.floatValor"
