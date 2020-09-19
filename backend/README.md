@@ -26,15 +26,6 @@
 
     ```
 
-## 4. Testando a Aplicação
-
-* Após executar todos os passos precisa digitar o comando abaixo para verificar se a aplicação está funcionando corretamente:
-
-```
-vendor/bin/phpunit
-
-```
-
-## 5. Consulta documentação de rotas da API
+## 4. Consulta documentação de rotas da API
 
 **[https://documenter.getpostman.com/view/491896/TVKBYxpX](https://documenter.getpostman.com/view/491896/TVKBYxpX)**
