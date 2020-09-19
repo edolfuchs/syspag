@@ -1,0 +1,114 @@
+[
+	{
+		"intId" : 1,
+		"intIdTipo" : null,
+		"strNome" : "TIPO USUÁRIO",
+		"strCor" : null,
+		"strValor" : null,
+		"intOrdem" : 1
+	},
+	{
+		"intId" : 2,
+		"intIdTipo" : 1,
+		"strNome" : "COMUM",
+		"strCor" : null,
+		"strValor" : null,
+		"intOrdem" : 1
+	},
+	{
+		"intId" : 3,
+		"intIdTipo" : 1,
+		"strNome" : "LOJISTA",
+		"strCor" : null,
+		"strValor" : null,
+		"intOrdem" : 2
+	},
+	{
+		"intId" : 4,
+		"intIdTipo" : null,
+		"strNome" : "STATUS TRANSAÇÃO",
+		"strCor" : null,
+		"strValor" : null,
+		"intOrdem" : 1
+	},
+	{
+		"intId" : 5,
+		"intIdTipo" : 4,
+		"strNome" : "TRANSFERÊNCIA EFETUADA",
+		"strCor" : "green",
+		"strValor" : null,
+		"intOrdem" : 1
+	},
+	{
+		"intId" : 6,
+		"intIdTipo" : 4,
+		"strNome" : "TRANSFERÊNCIA RECUSADA",
+		"strCor" : "orange",
+		"strValor" : null,
+		"intOrdem" : 2
+	},
+	{
+		"intId" : 7,
+		"intIdTipo" : 4,
+		"strNome" : "TRANSFERÊNCIA CANCELADA",
+		"strCor" : "red",
+		"strValor" : null,
+		"intOrdem" : 3
+	},
+	{
+		"intId" : 8,
+		"intIdTipo" : 4,
+		"strNome" : "TRANSFERÊNCIA ESTORNADA",
+		"strCor" : "orange",
+		"strValor" : null,
+		"intOrdem" : 4
+	},
+	{
+		"intId" : 9,
+		"intIdTipo" : null,
+		"strNome" : "STATUS NOTIFICAÇÃO",
+		"strCor" : null,
+		"strValor" : null,
+		"intOrdem" : 1
+	},
+	{
+		"intId" : 10,
+		"intIdTipo" : 10,
+		"strNome" : "SUCESSO AO NOTIFICAR USUARIO",
+		"strCor" : null,
+		"strValor" : null,
+		"intOrdem" : 2
+	},
+	{
+		"intId" : 11,
+		"intIdTipo" : 10,
+		"strNome" : "FALHA AO NOTIFICAR USUÁRIO",
+		"strCor" : null,
+		"strValor" : null,
+		"intOrdem" : 1
+	},
+	{
+		"intId" : 12,
+		"intIdTipo" : null,
+		"strNome" : "TIPO LANCAMENTO",
+		"strCor" : null,
+		"strValor" : null,
+		"intOrdem" : 1
+	},
+	{
+		"intId" : 13,
+		"intIdTipo" : 12,
+		"strNome" : "DÉBITO",
+		"strCor" : "red",
+		"strValor" : "-1",
+		"intOrdem" : 1
+	},
+	{
+		"intId" : 14,
+		"intIdTipo" : 12,
+		"strNome" : "CRÉDITO",
+		"strCor" : "green",
+		"strValor" : "1",
+		"intOrdem" : 1
+	}
+]
