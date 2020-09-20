@@ -42,7 +42,7 @@ class UsuarioTransferenciaRepository extends UsuarioTransferencia implements Usu
             ->paginate($this->getTotalPage());
     }
 
-    public function efetuarTransferencia(array $arrayData, UsuarioRepositoryIntercace $objUsuarioRepositoryIntercace, UsuarioExtratoRepositoryIntercace $objUsuarioExtratoRepositoryIntercace, ServiceAutorizadorRepositoryIntercace $objServiceAutorizadoInterface, ServiceNotificacaoRepositoryIntercace $objServiceNotificacaoInterface)
+    public function efetuarTransferencia(array $arrayData, UsuarioRepositoryIntercace $objUsuarioRepositoryIntercace, UsuarioExtratoRepositoryIntercace $objUsuarioExtratoRepositoryIntercace, ServiceAutorizadorRepositoryIntercace $objServiceAutorizadoInterface, ServiceNotificacaoRepositoryIntercace $objServiceNotificacaoInterface):int
     {
         $arrayData = $this->validate(
             $arrayData,
@@ -75,35 +75,14 @@ class UsuarioTransferenciaRepository extends UsuarioTransferencia implements Usu
                 throw new CustomException("Você não possui saldo suficiente para essa transação", 400, ['floatValor' => 'Você não possui saldo suficiente para essa transação']);
             }
 
-            //VALIDAR A TRANSFERENCIA VIA SERVIÇO EXTERNO
-            $intIdTipoStatusTransferencia = 5;
-            $strAutorizarTransferencia = $objServiceAutorizadoInterface->autorizar();
-
-            if ($strAutorizarTransferencia !== true) {
-                throw new \Exception("Transferência não autorizada. " . $strAutorizarTransferencia);
-            }
-
-            //NOTIFICAR O BENEFICIÁRIO VIA SERVIÇO EXTERNO
-            $strDataNotificacao = Utilidade::toDate();
-            $strObservacao = 'Usuário Notificado em '.$strDataNotificacao;
-            $intIdTipoStatusNotificacao = 10;
-            $strNotificarTransferencia = $objServiceNotificacaoInterface->notificar();
-
-            if ($strNotificarTransferencia !== true) {
-                $strObservacao = "Notificação da transferência não enviado. " . $strNotificarTransferencia;
-                $strDataNotificacao = null;
-                $intIdTipoStatusNotificacao = 11;
-            }
-
             //REGISTRAR TRANSAÇÃO
             $objUsuarioTransferencia = $this->firstOrNew(['intId' => 0]);
             $objUsuarioTransferencia->intIdUsuarioPagador = $objUsuarioRepositoryLogado->intId;
             $objUsuarioTransferencia->intIdUsuarioBeneficiario = $objUsuarioBeneficiario->intId;
-            $objUsuarioTransferencia->intIdTipoStatusTransferencia = $intIdTipoStatusTransferencia;
-            $objUsuarioTransferencia->intIdTipoStatusNotificacao = $intIdTipoStatusNotificacao;
-            $objUsuarioTransferencia->intIdTipoStatusNotificacao = $intIdTipoStatusNotificacao;
-            $objUsuarioTransferencia->strDataNotificacao = $strDataNotificacao;
-            $objUsuarioTransferencia->strObservacao = $strObservacao;
+            $objUsuarioTransferencia->intIdTipoStatusTransferencia = 5;
+            $objUsuarioTransferencia->intIdTipoStatusNotificacao = 10;
+            $objUsuarioTransferencia->strDataNotificacao = Utilidade::toDate();
+            $objUsuarioTransferencia->strObservacao = 'Usuário Notificado em '.Utilidade::toDate();
             $objUsuarioTransferencia->floatValor = $arrayData['floatValor'];
             $objUsuarioTransferencia->save();
 
@@ -135,9 +114,25 @@ class UsuarioTransferenciaRepository extends UsuarioTransferencia implements Usu
                 $objUsuarioRepositoryIntercace
             );
 
+            //VALIDAR A TRANSFERENCIA VIA SERVIÇO EXTERNO
+            $strAutorizarTransferencia = $objServiceAutorizadoInterface->autorizar();
+            if ($strAutorizarTransferencia !== true) {
+                throw new \Exception("Transferência não autorizada. " . $strAutorizarTransferencia);
+            }
+
+            //NOTIFICAR O BENEFICIÁRIO VIA SERVIÇO EXTERNO
+            $strNotificarTransferencia = $objServiceNotificacaoInterface->notificar();
+
+            if ($strNotificarTransferencia !== true) {
+                $objUsuarioTransferencia->intIdTipoStatusNotificacao = 11;
+                $objUsuarioTransferencia->strObservacao = "Notificação da transferência não enviado. " . $strNotificarTransferencia;
+                $objUsuarioTransferencia->strDataNotificacao = null;
+                $objUsuarioTransferencia->save();
+            }
+
             DB::commit();
 
-            return $this->listar($objUsuarioTransferencia->intId);
+            return $objUsuarioTransferencia->intId;
         } catch (CustomException $th) {
             DB::rollBack();
             throw new CustomException($th->getMessage(), $th->getStatus(), $th->getOptions());

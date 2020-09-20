@@ -43,7 +43,7 @@ class AuthRepository extends Usuario implements JWTSubject, AuthRepositoryInterc
         return $claims;
     }
 
-    public function loginAsync(array $arrayData)
+    public function loginAsync(array $arrayData):array
     {
 
         $data = $this->validate(
@@ -71,7 +71,7 @@ class AuthRepository extends Usuario implements JWTSubject, AuthRepositoryInterc
         ];
     }
 
-    public function logoutAsync()
+    public function logoutAsync():string
     {
 
         Auth::logout();
@@ -83,7 +83,7 @@ class AuthRepository extends Usuario implements JWTSubject, AuthRepositoryInterc
         self::$objUsuarioRepository = $objUsuarioRepository;
     }
 
-    public static function getUsuarioRepositoryLogado()
+    public static function getUsuarioRepositoryLogado():AuthRepository
     {
         return self::$objUsuarioRepository;
     }

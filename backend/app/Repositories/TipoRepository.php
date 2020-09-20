@@ -25,7 +25,7 @@ class TipoRepository extends Tipo implements TipoRepositoryIntercace
             ->paginate($this->getTotalPage());
     }
 
-    public function cadastrarTipo(array $arrayData)
+    public function cadastrarTipo(array $arrayData):int
     {
         $arrayData = $this->validate(
             $arrayData,
@@ -36,8 +36,6 @@ class TipoRepository extends Tipo implements TipoRepositoryIntercace
             )
         );
 
-        DB::beginTransaction();
-
         try {
             $objTipo = $this->firstOrNew(['intId' => $arrayData['intId']]);
             $objTipo->intIdTipo = (isset($arrayData['intIdTipo']) ? $arrayData['intIdTipo'] : null);
@@ -45,14 +43,10 @@ class TipoRepository extends Tipo implements TipoRepositoryIntercace
             $objTipo->intOrdem = $arrayData['intOrdem'];
             $objTipo->save();
 
-            DB::commit();
-
-            return $objTipo;
+            return $objTipo->intId;
         } catch (CustomException $th) {
-            DB::rollBack();
             throw new CustomException($th->getMessage(), $th->getStatus(), $th->getOptions());
         } catch (\Exception $th) {
-            DB::rollBack();
             throw new \Exception($th->getMessage());
         }
     }

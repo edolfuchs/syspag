@@ -7,11 +7,11 @@ use App\Repositories\AuthRepository;
 interface AuthRepositoryIntercace
 {
 
-    public function loginAsync(array $arrayData);
+    public function loginAsync(array $arrayData):array;
 
-    public function logoutAsync();
+    public function logoutAsync():string;
 
     public static function setUsuarioRepositoryLogado(AuthRepository $objUsuarioRepository);
 
-    public static function getUsuarioRepositoryLogado();
+    public static function getUsuarioRepositoryLogado():AuthRepository;
 }

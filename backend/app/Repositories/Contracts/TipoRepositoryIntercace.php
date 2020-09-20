@@ -4,5 +4,5 @@ namespace App\Repositories\Contracts;
 
 interface TipoRepositoryIntercace extends AsyncInterface
 {
-    public function cadastrarTipo(array $arrayData);
+    public function cadastrarTipo(array $arrayData):int;
 }

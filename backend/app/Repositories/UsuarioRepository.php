@@ -6,9 +6,7 @@ use App\Models\Usuario;
 use App\Helpers\Utilidade;
 use App\Traits\FilterTrait;
 use App\Traits\ValidateTrait;
-use App\Rules\FloatValidation;
 use App\Rules\DocumentoValidation;
-use Illuminate\Support\Facades\DB;
 use App\Exceptions\CustomException;
 use App\Repositories\AuthRepository;
 use App\Rules\NomeCompletoValidation;
@@ -40,7 +38,7 @@ class UsuarioRepository extends Usuario implements UsuarioRepositoryIntercace
             ->paginate($this->getTotalPage());
     }
 
-    public function cadastrarUsuario(array $arrayData)
+    public function cadastrarUsuario(array $arrayData):int
     {   
 
         $arrayData = $this->validate(
@@ -56,9 +54,6 @@ class UsuarioRepository extends Usuario implements UsuarioRepositoryIntercace
             )
         );
 
-
-        DB::beginTransaction();
- 
         try {
 
             if ($this->where('strEmail', $arrayData['strEmail'])->first()) {
@@ -78,14 +73,10 @@ class UsuarioRepository extends Usuario implements UsuarioRepositoryIntercace
             $objUsuario->floatSaldo = 0;
             $objUsuario->save();
 
-            DB::commit();
-
-            return $objUsuario;
+            return $objUsuario->intId;
         } catch (CustomException $th) {
-            DB::rollBack();
             throw new CustomException($th->getMessage(), $th->getStatus(), $th->getOptions());
         } catch (\Exception $th) {
-            DB::rollBack();
             throw new \Exception($th->getMessage());
         }
     }

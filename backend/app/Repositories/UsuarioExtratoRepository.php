@@ -4,11 +4,9 @@ namespace App\Repositories;
 
 use App\Traits\FilterTrait;
 use App\Traits\ValidateTrait;
-use App\Helpers\Utilidade;;
 
 use App\Models\UsuarioExtrato;
 use App\Rules\FloatValidation;
-use Illuminate\Support\Facades\DB;
 use App\Exceptions\CustomException;
 use App\Repositories\AuthRepository;
 use App\Repositories\Contracts\UsuarioRepositoryIntercace;
@@ -34,7 +32,7 @@ class UsuarioExtratoRepository extends UsuarioExtrato implements UsuarioExtratoR
             ->paginate($this->getTotalPage());
     }
 
-    public function listarSaldoPorUsuario(int $intIdUsuario)
+    public function listarSaldoPorUsuario(int $intIdUsuario):float
     {
         $floatSaldoDebito = $this
             ->where('intIdUsuario', $intIdUsuario)
@@ -50,7 +48,7 @@ class UsuarioExtratoRepository extends UsuarioExtrato implements UsuarioExtratoR
     }
 
 
-    public function cadastrarExtrato(array $arrayData, int $intIdUsuario, int $intIdTipoLancamento, UsuarioRepositoryIntercace $objUsuarioRepositoryIntercace)
+    public function cadastrarExtrato(array $arrayData, int $intIdUsuario, int $intIdTipoLancamento, UsuarioRepositoryIntercace $objUsuarioRepositoryIntercace):int
     {
 
         $arrayData = $this->validate(
@@ -59,8 +57,6 @@ class UsuarioExtratoRepository extends UsuarioExtrato implements UsuarioExtratoR
                 'floatValor' => ['required', new FloatValidation()],
             )
         );
-
-        DB::beginTransaction();
 
         try {
 
@@ -83,14 +79,10 @@ class UsuarioExtratoRepository extends UsuarioExtrato implements UsuarioExtratoR
             $objUsuarioExtrato->strObservacao = (isset($arrayData['strObservacao']) ? $arrayData['strObservacao'] : null);
             $objUsuarioExtrato->save();
 
-            DB::commit();
-
-            return $objUsuarioExtrato;
+            return $objUsuarioExtrato->intId;
         } catch (CustomException $th) {
-            DB::rollBack();
             throw new CustomException($th->getMessage(), $th->getStatus(), $th->getOptions());
         } catch (\Exception $th) {
-            DB::rollBack();
             throw new \Exception($th->getMessage());
         }
     }
