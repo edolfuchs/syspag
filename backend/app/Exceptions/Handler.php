@@ -79,6 +79,8 @@ class Handler extends ExceptionHandler
         'line' => $exception->getLine(),
         'info' => $exception->getTrace()
       ];
+
+      error_log($error['msg'].' in '.$error['trace']['file'].' '.$error['trace']['line']);
     }
 
     return Utilidade::toJson($error, $status);

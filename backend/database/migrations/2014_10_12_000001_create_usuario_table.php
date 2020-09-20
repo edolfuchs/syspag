@@ -20,13 +20,10 @@ class CreateUsuarioTable extends Migration
       $table->string('strEmail', 100)->unique();
       $table->string('strDocumento', 14)->unique();
       $table->string('strSenha');
-      $table->decimal('floatSaldo',8,2)->default(0);
       $table->timestamp('strDataCadastro')->nullable();
       $table->timestamp('strDataAtualizacao')->nullable();
 
       $table->foreign('intIdTipoUsuario')->references('intId')->on('tipo');
-
-      $table->index(['floatSaldo']);
     });
   }
 

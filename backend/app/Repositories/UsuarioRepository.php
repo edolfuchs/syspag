@@ -70,7 +70,6 @@ class UsuarioRepository extends Usuario implements UsuarioRepositoryIntercace
             $objUsuario->strEmail = $arrayData['strEmail'];
             $objUsuario->strDocumento = $arrayData['strDocumento'];
             $objUsuario->strSenha = $arrayData['strSenha'];
-            $objUsuario->floatSaldo = 0;
             $objUsuario->save();
 
             return $objUsuario->intId;
