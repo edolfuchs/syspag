@@ -5,5 +5,5 @@ namespace App\Repositories\Contracts;
 interface ServiceAutorizadorRepositoryIntercace
 {
 
-    public function autorizar();
+    public function autorizar():bool;
 }

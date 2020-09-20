@@ -5,5 +5,5 @@ namespace App\Repositories\Contracts;
 interface ServiceNotificacaoRepositoryIntercace
 {
 
-    public function notificar();
+    public function notificar():bool;
 }

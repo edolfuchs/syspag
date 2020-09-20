@@ -8,7 +8,7 @@ use App\Repositories\Contracts\ServiceAutorizadorRepositoryIntercace;
 class ServiceAutorizadorRepository implements ServiceAutorizadorRepositoryIntercace
 {
 
-    public function autorizar()
+    public function autorizar():bool
     {
         if ($result = Http::get(config('service.url_autorizar_transferencia'))) {
 
@@ -23,7 +23,7 @@ class ServiceAutorizadorRepository implements ServiceAutorizadorRepositoryInterc
                 }
             }
 
-            return 'Falha ao autorizar a transferência.';
+            throw new \Exception("Falha ao autorizar a transferência");
         }
     }
 }

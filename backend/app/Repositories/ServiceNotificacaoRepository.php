@@ -8,7 +8,7 @@ use App\Repositories\Contracts\ServiceNotificacaoRepositoryIntercace;
 class ServiceNotificacaoRepository implements ServiceNotificacaoRepositoryIntercace
 {
 
-    public function notificar()
+    public function notificar():bool
     {
         if ($result = Http::get(config('service.url_notificar_transferencia'))) {
 
@@ -23,7 +23,7 @@ class ServiceNotificacaoRepository implements ServiceNotificacaoRepositoryInterc
                 }
             }
 
-            return 'Falha ao notificar o beneficiário.';
+            throw new \Exception("Falha ao autorizar ao notificar o beneficiário");
         }
     }
 }
