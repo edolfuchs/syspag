@@ -28,7 +28,7 @@
 
       <ed-input-text
         class="col-md-4"
-        label="CPF/CNPJ"
+        :label="(formData.intIdTipoUsuario == 2 ? 'CPF' : 'CNPJ')"
         name="strDocumento"
         rules="required"
         v-model="formData.strDocumento"
