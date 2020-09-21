@@ -13,7 +13,7 @@
         rules="required"
         v-model="formData.intIdTipoUsuario"
         :items="list.arrayTipoUsuario"
-        icon-left="fa fa-user"
+        
       />
 
       <ed-input-text
@@ -22,7 +22,7 @@
         name="strNome"
         rules="required"
         v-model="formData.strNome"
-        icon-left="fa fa-usd"
+        icon-left="fa fa-user"
         :disabled="!formData.intIdTipoUsuario"
       />
 
