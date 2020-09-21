@@ -29,3 +29,7 @@
 ## 4. Consultar documentação de rotas da API
 
 **[https://documenter.getpostman.com/view/491896/TVKBYxpX](https://documenter.getpostman.com/view/491896/TVKBYxpX)**
+
+## 5. Diagrama de Entidade e Relacionamento
+
+![Screenshot](der.png)
