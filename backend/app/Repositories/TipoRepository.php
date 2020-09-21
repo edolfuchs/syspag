@@ -39,6 +39,8 @@ class TipoRepository extends Tipo implements TipoRepositoryIntercace
         try {
             $objTipo = $this->firstOrNew(['intId' => $arrayData['intId']]);
             $objTipo->intIdTipo = (isset($arrayData['intIdTipo']) ? $arrayData['intIdTipo'] : null);
+            $objTipo->strCor = (isset($arrayData['strCor']) ? $arrayData['strCor'] : null);
+            $objTipo->strValor = (isset($arrayData['strValor']) ? $arrayData['strValor'] : null);
             $objTipo->strNome = $arrayData['strNome'];
             $objTipo->intOrdem = $arrayData['intOrdem'];
             $objTipo->save();

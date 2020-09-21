@@ -43,7 +43,7 @@
 		"intId" : 6,
 		"intIdTipo" : 4,
 		"strNome" : "TRANSFERÊNCIA RECUSADA",
-		"strCor" : "orange",
+		"strCor" : "red",
 		"strValor" : null,
 		"intOrdem" : 2
 	},
@@ -51,7 +51,7 @@
 		"intId" : 7,
 		"intIdTipo" : 4,
 		"strNome" : "TRANSFERÊNCIA CANCELADA",
-		"strCor" : "red",
+		"strCor" : "orange",
 		"strValor" : null,
 		"intOrdem" : 3
 	},
