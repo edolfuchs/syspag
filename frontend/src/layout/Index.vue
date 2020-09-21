@@ -9,9 +9,6 @@
         light
         style="border-bottom:solid 1px #e5e5e5"
       >
-        <a href="/" class="d-flex router-link-active">
-          <img src="https://cdn.vuetifyjs.com/images/logos/v-alt.svg" height="38px" width="38px" />
-        </a>
 
         <v-toolbar-title
           class="ml-0 pl-4"
